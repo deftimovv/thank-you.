@@ -1,25 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Thank You</title>
+<title>Nothing App</title>
 <style>
 body {
-    margin: 0;
-    height: 100vh;
-    background: white;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    font-size: 32px;
-    text-align: center;
-    cursor: pointer;
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #111 0%, #000 65%);
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  max-width: 420px;
+  padding: 30px;
+}
+
+.counter {
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 18px;
+  opacity: 0.7;
+  margin-bottom: 30px;
+}
+
+.quote {
+  font-size: 16px;
+  opacity: 0.6;
+  margin-bottom: 35px;
+}
+
+button {
+  background: linear-gradient(135deg, #fff, #dcdcdc);
+  color: #000;
+  border: none;
+  border-radius: 16px;
+  padding: 16px 38px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 35px rgba(255,255,255,0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 50px rgba(255,255,255,0.45);
+}
+
+.live {
+  margin-top: 25px;
+  font-size: 13px;
+  opacity: 0.4;
+}
+
+.loading {
+  display: none;
+  font-size: 22px;
 }
 </style>
 </head>
-<body onclick="this.innerHTML='Thank u for ur dollar';">
-Click anywhere
+
+<body>
+
+<div class="container" id="main">
+  <div class="counter" id="counterText"></div>
+  <div class="subtitle">Pay $1. Get nothing.</div>
+  <div class="quote" id="quoteText"></div>
+
+  <button onclick="start()">Continue</button>
+
+  <div class="live" id="liveText"></div>
+</div>
+
+<div class="container loading" id="loading">
+  Processing your sacrifice…
+</div>
+
+<script>
+// COUNTER
+let count = localStorage.getItem("counter");
+count = count ? parseInt(count) + 1 : 1;
+localStorage.setItem("counter", count);
+document.getElementById("counterText").innerText =
+  "You are supporter #" + count;
+
+// RANDOM QUOTES
+const quotes = [
+  "This was a terrible financial decision.",
+  "Your ancestors are watching.",
+  "Capitalism won.",
+  "You could’ve bought a coffee.",
+  "Somewhere, a developer is smiling.",
+  "Money is temporary. Regret is forever."
+];
+document.getElementById("quoteText").innerText =
+  quotes[Math.floor(Math.random() * quotes.length)];
+
+// FAKE LIVE USERS
+document.getElementById("liveText").innerText =
+  Math.floor(Math.random() * 40 + 5) + " people are currently wasting money";
+
+// LOADING + REDIRECT
+function start() {
+  document.getElementById("main").style.display = "none";
+  document.getElementById("loading").style.display = "block";
+
+  setTimeout(() => {
+    window.location.href = "https://buymeacoffee.com/dragan2006";
+  }, 2000);
+}
+</script>
+
 </body>
 </html>
